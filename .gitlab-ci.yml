@@ -1,0 +1,42 @@
+# CONFIGURATION
+default:
+  image: 'rust:latest'
+  before_script:
+    # Update rust in case the latest version isn't built into our docker image.
+    - rustup update stable
+    - rustup component add clippy
+
+stages:
+  - test
+  - doc
+
+
+##### ########## ########## ########## ########## #####
+# TEST STAGE
+# - [PASS REQ] runs all unit tests in the build
+# - [PASS REQ] runs a lint checker over every piece of code
+
+test:
+  stage: test
+  script:
+    - rustc --version
+    - cargo --version
+    - cargo test --all-features --verbose
+
+lint:
+  stage: test
+  script:
+    - rustc --version
+    - cargo --version
+    - cargo clippy --all-features --all-targets -- -D warnings
+
+
+##### ########## ########## ########## ########## #####
+# DOC STAGE
+# - [PASS OPT] checks for documentation on all relevant pieces of code
+# - [PASS REQ] creates documentation pages
+doc-check:
+  stage: doc
+  script:
+    - cargo clippy --all-features --all-targets -- -A clippy::all -D clippy::missing_docs_in_private_items
+  allow_failure: true
