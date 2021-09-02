@@ -55,7 +55,7 @@ pub enum Detector {
         /// Size of one edge of a checker square, in metres.
         edge_length: f64,
         /// The variances (X/Y/Z) of object-space points, in metres^2.
-        variances: Vec<f64>,
+        variances: [f64; 3],
     },
 
     /// Detector for a ChArUco board within a camera image.
@@ -75,7 +75,7 @@ pub enum Detector {
         /// Should be smaller than `edge_length`.
         marker_length: f64,
         /// The variances (X/Y/Z) of object-space points, in metres^2.
-        variances: Vec<f64>,
+        variances: [f64; 3],
     },
 }
 
