@@ -48,9 +48,13 @@ pub enum Detector {
     ///
     /// - `"detector_defined"`
     Checkerboard {
+        /// Number of checker squares horizontally on the board.
         width: i64,
+        /// Number of checker squares vertically on the board.
         height: i64,
+        /// Size of one edge of a checker square, in metres.
         edge_length: f64,
+        /// The variances (X/Y/Z) of object-space points, in metres^2.
         variances: Vec<f64>,
     },
 
@@ -60,10 +64,17 @@ pub enum Detector {
     ///
     /// - `"detector_defined"`
     Charuco {
+        /// Number of checker squares horizontally on the board.
         width: i64,
+        /// Number of checker squares vertically on the board.
         height: i64,
+        /// Size of one edge of a checker square, in metres.
         edge_length: f64,
+        /// Size of one edge of the ArUco markers in the board.
+        ///
+        /// Should be smaller than `edge_length`.
         marker_length: f64,
+        /// The variances (X/Y/Z) of object-space points, in metres^2.
         variances: Vec<f64>,
     },
 }
